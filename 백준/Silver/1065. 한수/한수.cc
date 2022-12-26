@@ -1,44 +1,32 @@
 #include <iostream>
-
+ 
 using namespace std;
-
-bool IsHansu(int i)  //한수인지 검사
-{
-    int d=0;
-    int before_d=99;
-    int I=i;
-    while(true) //뒤에서부터 2개씩 검사
-    {
-        int a1=(int)(I%100)/10; 
-        int a2=I%10;
-        d=a2-a1;  
-        if(before_d==99)  //첫번째 검사인데
-        {
-            if(I/100<1)   //더 검사할게 없음(1~99)
-                return true;
-            before_d=d; 
-        }else if(d==before_d) //한수인데
-        {
-            if(I/100<1)  //더 검사할게 없음(1~99)
-                return true;
-            before_d=d; 
-        }else 
-            return false;
-
-        I/=10;
-    }
+ 
+int findHansu(int i) {
+	int cnt = 0;
+ 
+	if (i < 100) { //1~99는 모두 한수
+		return i;
+	} else { 
+		cnt = 99;  
+ 
+		for (int n = 100; n <= i; n++) {
+			int hun = n / 100;		 // 백의 자릿수
+			int ten = (n / 10) % 10; // 십의 자릿수
+			int one = n % 10;
+ 
+			if ((hun - ten) == (ten - one)) { 
+				cnt++;
+			}
+		}
+	}
+	return cnt;
 }
-
-int main()
-{
-
-    int i,input,cnt=0;
-    cin>>input;
-    for(i=1;i<=input;i++)
-    { 
-        if(IsHansu(i))
-            cnt++;
-    }
-    cout<<cnt;
-    return 0;
+ 
+int main() {
+ 
+	int i;
+	cin >> i;
+	cout << findHansu(i);
+	return 0;
 }
