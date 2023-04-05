@@ -4,29 +4,29 @@ using namespace std;
 
 int main()
 {
-    int N,result=0,del5=0;
+    int N;
     cin>>N;
-    //5를 우선시 하되, 오류가 뜨면 5를 줄여서 재계산
-    while(true)
+    int x,y;
+    int max=(5000/3)+((5000%3)/5);
+    int max_remain=((5000%3)%5);
+    int least=max;
+    if(N<3)
     {
-        int nextN,k5,k3;
-        k5=(N/5)-del5;
-        nextN=N%5+(del5*5);
-        if(nextN%3!=0 && k5!=0)
-        {
-            del5++;
-            continue;
-        }
-        if(nextN%3!=0)
-            result=-1;
-        else
-        {
-            k3=nextN/3;
-            //cout<<" "<<k5<<" "<<k3<<endl;
-            result=k5+k3;
-        }
-        break;
+        cout<<-1; return 0;
     }
-    cout<<result;
+    for(int i=N/5;i>=0;i--)
+    {
+        int xy;
+        x=i;
+        y=(N-i*5)/3;
+        if(5*x+3*y==N&&x+y<least)
+    	    least=x+y;
+    }
+     //합이 최대와 같을때 or least가 한번도 변경되지 않았을때
+    if(least==max&&max_remain!=0)
+        cout<<-1;
+    else
+        cout<<least;
+    
     return 0;
 }
