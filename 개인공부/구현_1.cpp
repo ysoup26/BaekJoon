@@ -12,7 +12,7 @@
 
 풀이: for문을 돌면서 명령이 없을때까지 이동한다.
       이동한 좌표가 공간을 벗어나면 continue로 무효시킨다.
-      명령의 개수를 알지 못하기 때문에 cin.eof를 이용한 입력처리가 필요하다.
+      명령의 개수를 알지 못하기 때문에 입력처리가 필요하다.
 */
 
 #include <iostream>
@@ -20,17 +20,16 @@
 using namespace std;
 
 //L,R,U,D
-//{x,y} 수평방향으로 y값이 변경되고, 수직방향으로 x값이 변경된다.
 int moveXY[4][2]={
      {0,-1},{0,1},{-1,0},{1,0}
 };
 
-int guide2idx(char c){
-    if(c=='L')
+int guide2idx(string c){
+    if(c.compare("L")==0)
         return 0;
-    else if(c=='R')
+    else if(c.compare("R")==0)
         return 1;
-    else if(c=='U')
+    else if(c.compare("U")==0)
         return 2;
     else
         return 3;
@@ -40,16 +39,17 @@ int main(){
     int N,x,y;
     cin>>N;
     x = y = 1;
-    while(!cin.eof())
+    while(!cin.eof()) /*eof의 값은 -1이기 때문에 char로 입력받으면 문제 발생(-1을 입력으로 취급하여 한번 더 실행됨)*/
     {
-        char g_c,g_i;
+        string g_c;
+        int g_i;
         int next_x,next_y;
         cin>>g_c;
         g_i = guide2idx(g_c);
         next_x = x + moveXY[g_i][0];
         next_y = y + moveXY[g_i][1];
-        if(next_x>0 && next_x>N+1 && next_y>0 && next_y>N+1)
-            continue;
+        if(next_x<1 || next_x>N || next_y<1 || next_y>N)
+            continue; 
         x = next_x;
         y = next_y;
     }
