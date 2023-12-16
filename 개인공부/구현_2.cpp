@@ -29,7 +29,7 @@ bool find3(int n)
 
 int main() {
     int N,cnt=0;
-    cin>>N;
+    cin>>N;ㅎ
     for(int h=0;h<N+1;h++){
         for(int m=0;m<60;m++){
             for(int s=0;s<60;s++){
