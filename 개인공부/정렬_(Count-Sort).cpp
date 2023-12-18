@@ -1,4 +1,4 @@
-/*Selection Sorting(선택 정렬)
+/*Selection Sort(계수 정렬)
   : 배열에서 최소값인 원소를 찾고 배열의 시작 원소와 교환(swap)해서 정렬하는 방식
   : O(n^2)의 시간 복잡도를 가짐
 */
