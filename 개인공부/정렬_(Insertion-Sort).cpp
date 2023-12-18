@@ -15,7 +15,7 @@ void list_print(int list[],int n)
     cout<<"\n";
 }
 
-void insertion_sorting(int list[],int n)
+void insertion_sort(int list[],int n)
 {
     for(int i=1;i<n;i++)
     {
@@ -35,7 +35,7 @@ void insertion_sorting(int list[],int n)
 int main(){
     int n = 5;
     int list[n] = {5, 7 ,3 ,6 ,1};
-    insertion_sorting(list,n);
+    insertion_sort(list,n);
     list_print(list,n);
     return 0;
 }

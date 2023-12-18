@@ -14,7 +14,7 @@ void list_print(int list[],int n)
     cout<<"\n";
 }
 
-void selection_sorting(int list[],int n)
+void selection_sort(int list[],int n)
 {
     for(int i=0;i<n-1;i++)
     {
@@ -37,7 +37,7 @@ void selection_sorting(int list[],int n)
 int main(){
     int n = 5;
     int list[n] = {5, 7 ,3 ,6 ,1};
-    selection_sorting(list,n);
+    selection_sort(list,n);
     list_print(list,n);
     return 0;
 }

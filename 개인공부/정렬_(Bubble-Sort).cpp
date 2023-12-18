@@ -15,7 +15,7 @@ void list_print(int list[],int n)
     cout<<"\n";
 }
 
-void bubble_sorting(int list[],int n)
+void bubble_sort(int list[],int n)
 {
     for(int i=n-1;i>0;i--) //정렬이 완료된 부분(n, n-1, n-2, ...)을 제외하기 위한 for문
     {
@@ -35,7 +35,7 @@ void bubble_sorting(int list[],int n)
 int main(){
     int n = 5;
     int list[n] = {5, 7 ,3 ,6 ,1};
-    bubble_sorting(list,n);
+    bubble_sort(list,n);
     list_print(list,n);
     return 0;
 }
