@@ -18,25 +18,21 @@ int binary_search(int arr[],int f,int start,int end) //탐색 배열,탐색 값 
     s = start;
     e = end;
     while(true){
+        //시작점과 끝점이 교차되면 종료
+        if(s > e)
+        {
+            f_idx = -1;
+            break;
+        }
         m = (s+e)/2;
         if(arr[m] == f) //f를 찾았다면 종료
         {
             f_idx = m;
             break;
-        }
-        else if(s!=m && e!=m)
-        {
-            if(arr[m] > f)  //f보다 중간점 값이 큼
-            {
-                e = m;
-            }else//f보다 중간점 값이 큼
-            {
-                s = m;
-            }
-        }else{
-            f_idx = -1;
-            break;
-        }
+        }else if(arr[m] > f)  //f보다 중간점 값이 큼
+            e = m-1;
+        else//f보다 중간점 값이 큼
+            s = m+1;
     }
     return f_idx;
     

@@ -13,19 +13,15 @@ using namespace std;
 
 int binary_search(int arr[],int f,int start,int end) //탐색 배열,탐색 값 , 시작점, 끝점
 {
+    if(start > end)
+        return -1;
     int m = (start+end)/2;
     if(arr[m] == f) //f를 찾았다면 종료
         return m;
-    else if(start!=m && end!=m)
-    {
-        if(arr[m] > f)  //f보다 중간점 값이 큼
-            return binary_search(arr,f,start,m);
-        else//f보다 중간점 값이 큼
-            return binary_search(arr,f,m,end);
-            
-        
-    }else
-        return -1;
+    else if(arr[m] > f)  //f보다 중간점 값이 큼
+            return binary_search(arr,f,start,m-1);
+    else
+        return binary_search(arr,f,m+1,end);
 };
 
 int main(){
