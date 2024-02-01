@@ -1,22 +1,21 @@
-/*부품 찾기
+/*떡볶이 떡 만들기
 
-1초 128MB
+2초 128MB
 
-문제 요약: N개의 부품 중에서, 손님이 M개의 부품이 있는지 확인을 부탁했다.
-          모두 있다면 yes 아니면 no
+문제 요약:  떡볶이 떡 절단기가 있다. 높이 H를 지정하면 떡을 자르고, 잘린 부분은 손님에게 준다.
+            손님이 요청한 길이(M)가 있을 때, 높이 H의 최대값을 구해라
+            (손님의 요청을 들어드리면서, 본인의 이득을 취하기 위해)
 
 입력: 
-        N
-        N개의 숫자들
-        M
-        M개의 숫자들
-        5
-        8 3 7 9 2
-        3
-        5 7 9
+        H M
+        H개의 떡 길이
+        4 6 
+        19 15 10 17
 
-풀이: 이진탐색을 활용한다. 
-      N개 숫자들을 정렬하고, M개의 숫자들을 각각 이진탐색해서 확인한다.
+풀이: 최적의 높이를 구하는 데에 이진탐색을 적용한다.
+      (이진 탐색이 없다면 0~1억까지 길이를 계산해야함)
+      0 ~ 가장 긴 떡의 길이 사이에 중간점을 잡고, 중간점을 이동시키면서 최적값을 찾는다.
+      중간점을 이동시키고 계산했을때, 원하는 값보다 크다면 중간점을 높여야한다.
 */
 
 
@@ -25,40 +24,43 @@
 
 using namespace std;
 
-int binary_search(int arr[],int f,int start,int end) //탐색 배열,탐색 값 , 시작점, 끝점
-{
-    if(start > end)
-        return -1;
-    int m = (start+end)/2;
-    if(arr[m] == f) //f를 찾았다면 종료
-        return m;
-    else if(arr[m] > f)  //f보다 중간점 값이 큼
-            return binary_search(arr,f,start,m-1);
-    else
-        return binary_search(arr,f,m+1,end);
-};
-
 int main(){
     int N,M;
-    cin>>N;
+    cin>>N>>M;
     int Narr[N];
-    for(int i=0;i<N;i++)
-    {
+    for(int i=0;i<N;i++){
         int tmp;
         cin>>tmp;
         Narr[i] = tmp;
     }
     //정렬
     sort(Narr,Narr+N);
-    cin>>M;
-    for(int i=0;i<M;i++)
-    {
-        int find_v;
-        cin>>find_v;
-        if(binary_search(Narr,find_v,0,N-1) > -1)
-            cout<<"yes ";
-        else
-            cout<<"no ";
+    int s,m,e,result_H;
+    s = 0;
+    e = Narr[N-1];
+    while(true){
+        //시작점과 끝점이 교차되면 종료: 답이 없음
+        if(s > e)
+        {
+            result_H = -1;
+            break;
+        }
+        m = (s+e)/2;
+        int sum = 0;
+        for(int i=0;i<N;i++){
+            if(Narr[i]-m>0)
+                sum += (Narr[i]-m); 
+        }
+        if(sum == M) //자른 떡의 합이 손님 요구와 동일(정답)
+        {
+            result_H = m;
+            break;
+        }else if(sum > M)  //자른 떡의 합이 손님 요구보다 큼(시작점을 증가시켜 중점도 증가)
+            s = m+1;
+        else  //자른 떡의 합이 손님 요구보다 작음(끝점을 감소시켜 중점도 낮춤)
+            e = m-1;
     }
+
+    cout<<result_H;
     return 0;
 }
