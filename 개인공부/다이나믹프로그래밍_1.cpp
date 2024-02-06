@@ -2,21 +2,20 @@
 
 1초 128MB
 
-문제 요약: N개의 부품 중에서, 손님이 M개의 부품이 있는지 확인을 부탁했다.
-          모두 있다면 yes 아니면 no
+문제 요약: 정수 X가 주어질 때, 사용할 수 있는 연산 4가지를 이용하여 1로 만들어야한다.
+          이때 연산을 사용하는 최솟값을 구하여라
 
-입력: 
-        N
-        N개의 숫자들
-        M
-        M개의 숫자들
-        5
-        8 3 7 9 2
-        3
-        5 7 9
+        연산4가지 
+        x%5 / x%3 / x%2 / x-1
 
-풀이: 이진탐색을 활용한다. 
-      N개 숫자들을 정렬하고, M개의 숫자들을 각각 이진탐색해서 확인한다.
+입력: X
+        
+
+풀이: 피보나치를 구현했던 것처럼 각각의 d[i]에 연산 횟수를 집어넣는다.
+      d[i]를 집어넣을 때 4가지 연산이 가능한지 확인하고, 
+      min을 통해 최소 연산을 집어넣는다.
+      d[2]~d[X]까지 순차적으로 집어넣으면 d[X]의 최소값을 구할 수 있다.
+
 */
 
 
@@ -25,31 +24,28 @@
 
 using namespace std;
 
-int d[100];
+int d[30001];
 
-int f_topdown(int n)
-{
-    if(n == 1 || n == 2)
-        return n;
-    if(d[n] != 0)
-        return d[n];
-    d[n] = f_topdown(n-1) + f_topdown(n-2);
-    return d[n];
-}
-
-int f_bottom(int n){
-    d[1] = 1;
-    d[2] = 2;
-    for(int i=3;i<=n;i++){
-        d[i] = d[i-1] + d[i-2];
+int make_one(int X){
+    int m;
+    for(int i=2;i<=X;i++){
+        d[i] = d[i-1] + 1; //d[i-1]는 d[i]보다 연산횟수가 1 적다.
+        if( i%2 == 0 ){
+            d[i] = min(d[i],d[i/2]+1);
+        }
+        if( i%3 == 0 ){
+            d[i] = min(d[i],d[i/3]+1);
+        }
+        if( i%5 == 0 ){
+            d[i] = min(d[i],d[i/5]+1);
+        }
     }
-    return d[n];
+    return d[X]; 
 }
 
 int main(){
-    int n;
-    cin>>n;
-    cout<<f_topdown(n)<<"\n";
-    cout<<f_bottom(n);
+    int X;
+    cin>>X;
+    cout<<make_one(X);
     return 0;
 }
