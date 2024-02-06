@@ -25,7 +25,7 @@
 
 #include <iostream>
 #include <vector>
-#include <heap>
+#include <queue>
 
 #define INF 987654321
 using namespace std;
@@ -59,13 +59,12 @@ void dijkstra(int start){
     PQ.push(make_pair(0,start));
     dist[start] = 0;
     while(PQ.empty()==0){
-        int cost = PQ.top().first;
+        int cost = -PQ.top().first; //최소힙 사용을 위해 음수를 붙임()
         int node = PQ.top().second;
         PQ.pop();
-        for(int i=0;j<graph[node].size();i++){
+        for(int i=0;i<graph[node].size();i++){
             int next_node = graph[node][i].first;
             int next_dist = graph[node][i].second;
-            int cost = dist[node] + next_dist;
             if(dist[next_node] > cost + next_dist){
                 dist[next_node] = cost + next_dist;
                 PQ.push(make_pair(-dist[next_node],next_node));
