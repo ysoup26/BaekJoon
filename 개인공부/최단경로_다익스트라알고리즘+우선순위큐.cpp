@@ -30,44 +30,32 @@
 #define INF 987654321
 using namespace std;
 
-bool visited[100+1];
-int dist[100+1];
+int d[100+1];
 vector<pair<int,int>> graph[100+1];
 int N,M;
 
 void print_node_dist(){
     for(int i=1;i<=N;i++){
-        cout<<dist[i]<<" ";
+        cout<<d[i]<<" ";
     }
-}
-
-int get_min_node(){
-    int min_node;
-    int min_dist = INF;
-    for(int i=1;i<=N;i++){
-        if(min_dist > dist[i] && !visited[i])
-        {
-            min_dist = dist[i];
-            min_node = i;
-        }
-    }
-    return min_node;
 }
 
 void dijkstra(int start){
     priority_queue<pair<int,int>> PQ;
     PQ.push(make_pair(0,start));
-    dist[start] = 0;
+    d[start] = 0;
     while(PQ.empty()==0){
-        int cost = -PQ.top().first; //최소힙 사용을 위해 음수를 붙임()
-        int node = PQ.top().second;
+        int dist = -PQ.top().first; //최소힙 사용을 위해 음수를 붙임()
+        int now = PQ.top().second;
         PQ.pop();
-        for(int i=0;i<graph[node].size();i++){
-            int next_node = graph[node][i].first;
-            int next_dist = graph[node][i].second;
-            if(dist[next_node] > cost + next_dist){
-                dist[next_node] = cost + next_dist;
-                PQ.push(make_pair(-dist[next_node],next_node));
+        if(d[now] < dist) //현재의 노드 cost보다 크다면 무시
+            continue;
+        for(int i=0;i<graph[now].size();i++){
+            int next = graph[now][i].first;
+            int cost = dist + graph[now][i].second;
+            if(d[next] > cost){
+                d[next] = cost;
+                PQ.push(make_pair(-d[next],next));
             }
         }
     }
@@ -77,8 +65,7 @@ int main(){
     //노드와 간선 개수, 시작 노드 등을 입력받고 초기화함
     int start;
     cin>>N>>M>>start;
-    fill(visited,visited+101,false);
-    fill(dist,dist+101,INF);
+    fill(d,d+101,INF);
     for(int i=1;i<=M;i++){
         int a,b,c;
         cin>>a>>b>>c;
