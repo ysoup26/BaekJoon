@@ -28,9 +28,9 @@ int parent[20];
 int find_parent(int x){
     //부모 노드가 자신이 아니면
     if(parent[x]!=x){
-        return find_parent(parent[x]);
+        parent[x] find_parent(parent[x]);
     }
-    return x;
+    return parent[x];
 }
 
 //두 원소가 속한 집합을 합치기
