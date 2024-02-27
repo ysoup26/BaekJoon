@@ -36,7 +36,7 @@ int parent[20];
 int find_parent(int x){
     //부모 노드가 자신이 아니면
     if(parent[x]!=x){
-        parent[x] find_parent(parent[x]);
+        parent[x] = find_parent(parent[x]);
     }
     return parent[x];
 }
