@@ -7,7 +7,7 @@
 ~간선만큼의 개수
 
 7 9 
-1 2 9
+1 2 29
 1 5 75
 2 3 35
 2 6 34
@@ -18,12 +18,11 @@
 6 7 25
 
 정답: 159
-각 원소가 속한 집합: 1 1 1 1 5 5
-부모 테이블: 1 1 2 1 5 5
 
 */
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -42,14 +41,16 @@ class Edge{
         bool operator<(Edge &edge){
             return this->dist < edge.dist;
         }
-
-}
+        void print_member(){
+            cout<<this->node[0]<<" "<<this->node[1]<<" "<<this->dist<<"\n";
+        }
+};
 
 //특정 원소가 속한 집합을 찾기
 int find_parent(int x){
     //부모 노드가 자신이 아니면
     if(parent[x]!=x){
-        parent[x] find_parent(parent[x]);
+        parent[x] = find_parent(parent[x]);
     }
     return parent[x];
 }
@@ -73,28 +74,30 @@ bool isCycle(int a,int b)
 }
 
 int main(){
-    //노드와 간선 개수, 시작 노드 등을 입력받고 초기화함
     cin>>V>>E;
+    vector<Edge> edges;
+    int sum = 0;
     //부모 테이블에서, 부모를 자기 자신으로 초기화
     for(int i=1;i<=V;i++){
         parent[i] = i;
     }
-    bool IsCycle = false;
-
-    //union연산 E번 수행
-    for(int i=1;i<=E;i++){
-        int a,b;
-        cin>>a>>b;
-        if(isCycle(a,b)){
-            IsCycle = true;
-            break;
-        }          
-        union_parent(a,b);
+    //간선 정보를 입력 받음
+    for(int i=0;i<E;i++){
+        int a,b,dist;
+        cin>>a>>b>>dist;
+        edges.push_back(Edge(a,b,dist));
     }
-
-    if(IsCycle)
-        cout<<"사이클이 발생했습니다.";
-    else
-        cout<<"사이클이 발생하지 않았습니다.";
+    //오름차순 정렬
+    sort(edges.begin(),edges.end());
+    //낮은 비용의 간선부터 연결 수행
+    for(int i=0;i<edges.size();i++){
+        //사이클이 없다면 노드 연결
+        if(!isCycle(edges[i].node[0],edges[i].node[1]))
+        {
+            sum+=edges[i].dist;
+            union_parent(edges[i].node[0],edges[i].node[1]);
+        }
+    }
+    cout<<sum;
     return 0;
 }
