@@ -32,11 +32,38 @@
 
 using namespace std;
 
-vector<int> graph;
+int N,M;
+vector<int> graph[20+1];
 int indegree[20+1]; //진입차수 정보에 대한 배열
 
+//위상 정렬함수
+void topology_sort(){
+    vector<int> result;
+    queue<int> q;
+    //시작시, 진입차수가 0인 노드 삽입
+    for(int i=1;i<=N;i++){
+        if(indegree[i]==0)
+            q.push(i);
+    }
+    while(!q.empty()){
+        int now = q.front();
+        result.push_back(now);
+        q.pop();
+        //now노드와 연결된 노드 확인
+        for(int i=0;i<graph[now].size();i++){
+            int next = graph[now][i];
+            indegree[next]-=1;
+            if(indegree[next]==0)
+                q.push(next);
+        }
+    }
+    for(int i=0;i<result.size();i++){
+            cout<<result[i]<<" ";
+        }
+}
+
 int main(){
-    int N,M;
+    
     cin>>N>>M;
     fill(indegree,indegree+M,0);
     for(int i=0;i<M;i++){
@@ -45,6 +72,6 @@ int main(){
         graph[a].push_back(b);
         indegree[b]+=1;
     }
-    
+    topology_sort();
     return 0;
 }
