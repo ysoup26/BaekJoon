@@ -1,60 +1,50 @@
 /*모험가 길드
-2019 국가 교육기관 코딩 테스트
 
-문제 요약: 다양한 수로 이루어진 배열이 있을때,
-주어진 수들을 M번 더해 가장 큰 수를 만들어라.
-단, 같은 인덱스를 연속해서 더할때 때 K번을 초과하면 안된다.
+문제 요약: N명의 모험가가 있고, 각 모험가들은 공포도를 가지고 있다.
+          이들로 그룹을 짜야하는데, 어떤 모험가의 공포도가 X라면
+          이 모험가는 X명으로 이루어진 팀에 소속되어야 한다.
+          최대 몇 개의 모험가 그룹을 만들 수 있는가?
 
-입력: N(배열 크기) M K
-      N만큼의 숫자나열
+입력: N(모험가 수) 
+      N명의 모험가에 대한 공포도
+5
+2 3 1 2 2
+
+풀이: 공포도가 큰 모험가 순서대로 팀을 배정하여 
+      공포도가 큰 모험가가 배제되지 않도록 그룹을 짠다.
+      모험가들의 공포도를 정렬하고, 전체 모험가수 - I번째 모험가의 공포도를 하여
+      그룹을 카운트한다.
 
 */
 
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
-int main(){
-
-    int N,M,K;
-    int sum = 0, count = 0, big_i = 0;
-    cin>>N>>M>>K;
-    int Narr[N];
-    //배열 입력
-    for(int i=0;i<N;i++)
-    {
+int main(){ 
+    int N;
+    cin>>N;
+    int peoples[N];
+    for(int i=0;i<N;i++){
         int tmp;
         cin>>tmp;
-        Narr[i] = tmp;
+        peoples[i] = tmp;
     }
-    //배열 내림차 정렬
-    for(int i=0;i<N-1;i++)
-    {
-        for(int j=i;j<N;j++)
+    sort(peoples,peoples+N);
+    int total = N;
+    int group = 0;
+    int index = 0;
+    while(total>0&&index<N){
+        if(total>=peoples[index])
         {
-            if(Narr[i]<Narr[j])
-            {
-                int tmp = Narr[i];
-                Narr[i] = Narr[j];
-                Narr[j] = tmp;
-            }
+            total-=peoples[index];
+            group++;
         }
-    }
+        index++;
 
-    //덧셈 수행
-    //가장 큰 값으로 덧셈을 하나 K번을 넘어가면 두번째로 큰 값을 더하고 돌아옴  
-    for(int i=0;i<M;i++)
-    {
-        if(count==K)
-        {
-            sum+=Narr[1];
-            count = 0;
-        }else{
-            sum+=Narr[0];
-            count++;
-        }
 
     }
-    cout<<sum;
+    cout<<group;
     return 0;
 }
