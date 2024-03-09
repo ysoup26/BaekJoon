@@ -10,10 +10,11 @@
 5
 2 3 1 2 2
 
-풀이: 공포도가 큰 모험가 순서대로 팀을 배정하여 
+풀이: 공포도가 큰 모험가 기준으로 팀을 배정하여 
       공포도가 큰 모험가가 배제되지 않도록 그룹을 짠다.
-      모험가들의 공포도를 정렬하고, 전체 모험가수 - I번째 모험가의 공포도를 하여
-      그룹을 카운트한다.
+      모험가들의 공포도를 정렬하고, 
+      기준 모험가 = 기준 모험가 + 기준 모험가의 공포도
+      를 통해 그룹 수를 카운트한다.
 
 */
 
@@ -25,25 +26,22 @@ using namespace std;
 int main(){ 
     int N;
     cin>>N;
-    int peoples[N];
+    int p[N];
     for(int i=0;i<N;i++){
         int tmp;
         cin>>tmp;
-        peoples[i] = tmp;
+        p[i] = tmp;
     }
-    sort(peoples,peoples+N);
-    int total = N;
+    sort(p,p+N);
+    reverse(p,p+N);
     int group = 0;
-    int index = 0;
-    while(total>0&&index<N){
-        if(total>=peoples[index])
-        {
-            total-=peoples[index];
-            group++;
-        }
-        index++;
-
-
+    int p_i = 0;
+    while(true){
+        int now_fear =  p[p_i];
+        if((now_fear+p_i)>N) //다음 모험가의 번호가 N을 넘어서면 이 그룹은 유효하지 않다. break
+            break;
+        group++;
+        p_i+=now_fear;
     }
     cout<<group;
     return 0;
