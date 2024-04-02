@@ -9,6 +9,7 @@
          2) 국어 점수가 같다면 영어 점수가 증가하는 순서로
          3) 국어, 영어 점수가 같다면 수학 점수가 감소하는 순서로
          4) 모든 점수가 같으면 이름 사전 순 증가로
+
 입력: 
 12
 Junkyu 50 60 100
@@ -30,24 +31,61 @@ Taewhan 50 60 90
 
 #include <iostream>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
+class People{
+public:
+    string name;
+    int k,e,s;
+    People(){
+        
+    };
+    void init(string p,int k,int e,int s){
+        this->name = p;
+        this->k = k;
+        this->e = e;
+        this->s = s;
+    };
+    void change_People(People p){
+        this->name = p.name;
+        this->k = p.k;
+        this->e = p.e;
+        this->s = p.s;
+    }
+};
 
 int main()
 {
     int N;
     cin>>N;
-    int People[N][4];
+    vector<People> pp;
     for(int i=0;i<N;i++){
         string p_name;
         int k,e,s;
         cin>>p_name>>k>>e>>s;
-        People[i][0]=p_name;
-        People[i][1]=k;
-        People[i][2]=e;
-        People[i][3]=s;
+        People p;
+        p.init(p_name,k,e,s);
+        pp.push_back(p);
     }
-    
+    for(int i=0;i<N-1;i++){
+        int min_idx = i;
+        for(int j=i+1;j<N;j++){
+            if(pp[j].k<pp[min_idx].k) //최솟값 idx를 저장
+                min_idx = j;
+        }
+        if(i!=min_idx) //시작 idx와 최솟값 idx가 동일하지 않으면 swap //swap은 딱 한번만
+        {
+            People tmp = pp[i];
+            pp[i].change_People(pp[min_idx]);
+            pp[min_idx].change_People(tmp);
+        }
+    }
+    for(int i=0;i<N;i++){
+        string p_name;
+        p_name = pp[i].name;
+        cout<<p_name<<"\n";
+    }
     return 0;
 }
