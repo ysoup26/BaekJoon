@@ -25,34 +25,48 @@ Sanghyun 70 70 80
 nsj 80 80 80
 Taewhan 50 60 90
 
-풀이: 
+Donghyuk
+Sangkeun
+Sunyoung
+nsj
+Wonseob
+Sanghyun
+Sei
+Kangsoo
+Haebin
+Junkyu
+Soong
+Taewhan
+
+풀이: 조건이 여러개이기 때문에 선택 정렬 방식을 사용한다.
+      선택할 학생을 정하기 위해 주어진 조건4개에 대한 if문 검사를 하며, 
+      별도의 학생 클래스를 생성하여 swap과 초기화 등을 용의하게 구현했다.
 */
 
 
 #include <iostream>
-#include <algorithm>
 #include <vector>
 
 using namespace std;
 
-class People{
+class Student{
 public:
     string name;
-    int k,e,s;
-    People(){
+    int kr,en,math;
+    Student(){
         
     };
-    void init(string p,int k,int e,int s){
-        this->name = p;
-        this->k = k;
-        this->e = e;
-        this->s = s;
+    void init(string n,int k,int e,int m){
+        this->name = n;
+        this->kr = k;
+        this->en = e;
+        this->math = m;
     };
-    void change_People(People p){
-        this->name = p.name;
-        this->k = p.k;
-        this->e = p.e;
-        this->s = p.s;
+    void change_student(Student s){
+        this->name = s.name;
+        this->kr = s.kr;
+        this->en = s.en;
+        this->math = s.math;
     }
 };
 
@@ -60,32 +74,47 @@ int main()
 {
     int N;
     cin>>N;
-    vector<People> pp;
+    vector<Student> ss;
+    //학생 입력
     for(int i=0;i<N;i++){
-        string p_name;
-        int k,e,s;
-        cin>>p_name>>k>>e>>s;
-        People p;
-        p.init(p_name,k,e,s);
-        pp.push_back(p);
+        string s_name;
+        int k,e,m;
+        cin>>s_name>>k>>e>>m;
+        Student s;
+        s.init(s_name,k,e,m);
+        ss.push_back(s);
     }
+    //선택 정렬: 4가지 기준 체크
     for(int i=0;i<N-1;i++){
-        int min_idx = i;
+        int swap_idx = i;
         for(int j=i+1;j<N;j++){
-            if(pp[j].k<pp[min_idx].k) //최솟값 idx를 저장
-                min_idx = j;
+            if(ss[j].kr > ss[swap_idx].kr)                     //1) 국어 점수가 감소하는 순서
+                swap_idx = j;
+            else if(ss[j].kr == ss[swap_idx].kr){              //2) 국어 점수가 같다면 
+                if(ss[j].en < ss[swap_idx].en)                 //영어 점수가 증가하는 순서로
+                    swap_idx = j;
+                else if(ss[j].en == ss[swap_idx].en){          //3) 국어, 영어 점수가 같다면
+                    if(ss[j].math > ss[swap_idx].math)         //수학 점수가 감소하는 순서로
+                        swap_idx = j;
+                    else if(ss[j].math == ss[swap_idx].math){  //4) 모든 점수가 같으면 
+                        if(ss[j].name < ss[swap_idx].name)     //이름 사전 순 증가로
+                            swap_idx = j;
+                    }
+                }
+            }
         }
-        if(i!=min_idx) //시작 idx와 최솟값 idx가 동일하지 않으면 swap //swap은 딱 한번만
+        //선택된 학생 idx와 시작 idx를 서로 swap 
+        if(i!=swap_idx)
         {
-            People tmp = pp[i];
-            pp[i].change_People(pp[min_idx]);
-            pp[min_idx].change_People(tmp);
+            Student tmp = ss[i];
+            ss[i].change_student(ss[swap_idx]);
+            ss[swap_idx].change_student(tmp);
         }
     }
     for(int i=0;i<N;i++){
-        string p_name;
-        p_name = pp[i].name;
-        cout<<p_name<<"\n";
+        string name;
+        name = ss[i].name;
+        cout<<name<<"\n";
     }
     return 0;
 }
