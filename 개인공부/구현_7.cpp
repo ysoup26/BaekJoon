@@ -2,45 +2,56 @@
 
 1초 128MB
 
-문제 요약: 
+문제 요약: 문자열을 n개 이상의 단위로 잘라서 문자열을 압축시키려고 한다.
+          문자열 s가 주어졌을 때, 압축하여 표현한 문자열 중 가장 짧은 길이를 출력해라
+
+예시: aabbacc -> 2a2ba2c 로 압축
+      abcabcdede -> abcab2de or 2abcdede 로 압축할 수 있고 후자가 더 짧음
+
+주의: 한 문자열을 압축할 때, 여러 단위를 혼합할 수  없다
+      n=3일때는 3개씩만 나눌 수 있음
 
 입력: 
-K1KA5CB7
->>ABCKK13
+aabbaccc -> 7
 
-AJKDLSI412K4JSJ9D
->>ADDIJJJKKLSS20
 
-풀이: 문자열에서 알파벳과 숫자를 구분해낸다.
-     알파벳은 재정렬이 필요함으로 별도의 배열에 저장해두었다가 sort함수로 정렬하고 
-     숫자는 즉시 덧셈한다. 
+풀이: 
 
 */
 
 #include <iostream>
-#include <algorithm>
+#include <string>
+#include <vector>
+
 using namespace std;
 
-
-int main() {
-    string s;
-    char s_arr[10000];
-    int s_arr_i = 0;
-    int n = 0;
-    cin>>s;
-    for(int i=0;i<s.length();i++){
-        char c = s[i];
-        if(c>='A' && c<='Z'){
-            s_arr[s_arr_i] = c;
-            s_arr_i++;
+int solution(string s) {
+    int answer = 0;
+    int n = 1;
+    int idx = 0;
+    bool IsSame = false;
+    while(idx<s.length()){
+        cout<<"idx: "<<idx<<" ";
+        if(s[idx] == s[idx+1]){
+            //cout<<"지금과 같다 ";
+            IsSame = true;
+        }else if(IsSame && s[idx] != s[idx+1]){
+            //cout<<"지금과 다르다. 압축 중지 ";
+            answer+=(n+1);
+            IsSame = false;
         }else{
-            n+=(c-'0');
+            //cout<<"압축 불가 ";
+            answer+=n;
         }
+        idx++;
+        //cout<<answer<<"\n";
     }
-    sort(s_arr,s_arr+s_arr_i);
-    for(int i=0;i<s_arr_i;i++){
-        cout<<s_arr[i];
-    }
-    cout<<n;
+    return answer;
+}
+
+int main(){
+    string s;
+    cin>>s;
+    cout<<solution(s);
     return 0;
 }
