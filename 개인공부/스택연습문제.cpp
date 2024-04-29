@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stack>
 
 #define MAX_ 100000
 
@@ -14,7 +15,7 @@ public:
         now = -1;
     }
     void push(int x){
-        if(Top < now)
+        if(Top == now)
         {
             return;
         }
@@ -23,54 +24,62 @@ public:
     };
     int pop(){
         int result;
-        if(IsEmpty()){
-            result = -1;
-        }else{
-            result = Arr[now];
-            now--;
-        }
+        result = Arr[now];
+        now--;
         return result;
     }
     int size(){
-        if(Bottom > now){
+        if(empty()){
             return 0;
         }else
             return now+1;
     }
-    int IsEmpty(){
+    int empty(){
         int result;
         if(Bottom > now)
-            result=1;
+            result = 1;
         else
             result = 0;
         return result;
     }
     int top(){
-        if(IsEmpty()){
-            return -1;
-        }else
-            return Arr[now];
+         return Arr[now];
     }
 };
 
 int main(){
-    int N;
+    ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+    int N,M,X;
     cin>>N;
-    Stack s;
+    //Stack s;
+    stack<int> s;
     for(int i=0;i<N;i++){
-        int n,x;
-        cin>>n;
-        if(n==1){
-            cin>>x;
-            s.push(x);
-        }else if(n==2){
-            cout<<s.pop()<<"\n";
-        }else if(n==3){
+        cin>>M;
+        if(M==1){
+            cin>>X;
+            s.push(X);
+        }else if(M==2){
+            if(s.empty()){
+                cout<<"-1\n";
+            }else{
+                cout<<s.top()<<"\n";
+                s.pop();
+            }
+        }else if(M==3){
             cout<<s.size()<<"\n";
-        }else if(n==4){
-            cout<<s.IsEmpty()<<"\n";
-        }else if(n==5){
-            cout<<s.top()<<"\n";
+        }else if(M==4){
+            if(s.empty()){
+                cout<<"1\n";
+            }else{
+                cout<<"0\n";
+            }
+        }else if(M==5){
+            if(s.empty()){
+                cout<<"-1\n";
+            }else{
+                cout<<s.top()<<"\n";
+            }
         }
     }
     return 0;
