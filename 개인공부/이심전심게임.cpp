@@ -13,10 +13,23 @@
 
 string keyword[6] ={"으쓱","미소","윙크","실망","놀람","화남"};
 
+string get_keyword_probability(string s1,string s2){
+    int i = 0;
+    return keyword[i];
+};
+
 int main(){
-    //랜덤 두 키워드
+    //1) 두 키워드 제시(랜덤)
+    string keyword1,keyword2;
     string user,bot;
+    //2) 유저와 봇이 키워드를 하나씩 선택
     cin>>user;
+    //bot = get_keyword_probability(keyword1,keyword2);
     cout<<"유저: "<<user<<" / 봇: "<<bot;
+    //3) 두 키워드가 동일하면 정답
+    if(user == bot)
+        cout<<"정답";
+    else
+        cout<<"오답";
     return ;
 }
