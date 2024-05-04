@@ -9,7 +9,7 @@ int main(){
     int N;
     cin>>N;
     int result = 0;
-    for(int i=1;i<N;i++){
+    for(int i=N/2;i<N;i++){
         int sum = i;
         int num = i;
         while(num!=0){
