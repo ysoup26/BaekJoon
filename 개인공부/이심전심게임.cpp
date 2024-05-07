@@ -10,26 +10,39 @@
 */
 
 #include <iostream>
+#include <random>
+
+using namespace std;
 
 string keyword[6] ={"으쓱","미소","윙크","실망","놀람","화남"};
 
+string get_random_keywords(){
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dis(0,5);
+    return keyword[dis(gen)];
+}
+
 string get_keyword_probability(string s1,string s2){
     int i = 0;
-    return keyword[i];
+    return s1;
 };
 
 int main(){
     //1) 두 키워드 제시(랜덤)
     string keyword1,keyword2;
+    keyword1 = get_random_keywords();
+    keyword2 = get_random_keywords();
+    cout<<"<---키워드 하나를 선택하세요: "<<keyword1<<" or "<<keyword2<<"--->\n";
     string user,bot;
     //2) 유저와 봇이 키워드를 하나씩 선택
     cin>>user;
-    //bot = get_keyword_probability(keyword1,keyword2);
-    cout<<"유저: "<<user<<" / 봇: "<<bot;
+    bot = get_keyword_probability(keyword1,keyword2);
+    cout<<"유저: "<<user<<" / 봇: "<<bot<<"\n>>";
     //3) 두 키워드가 동일하면 정답
     if(user == bot)
         cout<<"정답";
     else
         cout<<"오답";
-    return ;
+    return 0;
 }
