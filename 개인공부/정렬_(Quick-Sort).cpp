@@ -49,8 +49,8 @@ void quick_sort(int list[],int start,int end)
     }
     //나눠진 배열에 각각 정렬 수행
     //pivot값은 list[high]로 이동되었기 때문에 high를 이용.
-    quick_sort(list,start,high-1);
-    quick_sort(list,high+1,end);
+    quick_sort(start,high-1);
+    quick_sort(high+1,end);
 }
 
 int main(){

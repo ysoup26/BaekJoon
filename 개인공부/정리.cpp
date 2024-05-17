@@ -13,6 +13,8 @@
 
 */
 
+/*DFS/BFS*/
+
 //깊은 너비 탐색
 //반환형으로 void나 bool을 사용
 //bool을 사용하면, 시작하는 좌표는 true를 반환하기 때문에 구역 세기에 용이하다.
@@ -51,4 +53,34 @@ void bfs(int x){
             }
         }
     }
+}
+
+/*정렬*/
+
+//quick sort
+//시간복잡도가 낮은 정렬방법
+//pivot이라는 정하고, pivot을 기준으로 배열을 나눈후 정렬하는 방식
+//각각의 나눠진 배열은 계속해서 pivot을 정하고 나누면서 정렬을 수행한다
+void quick_sort(int start,int end){
+    int pivot = start;
+    int left = start+1;
+    int right = end;
+    while(left<=right){
+        while(left<=end && arr[left]<=arr[pivot])
+            left++;
+        while(right>=start+1 && arr[right]>=arr[pivot])
+            right--;
+        if(left<=right){
+            int tmp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = tmp;
+        }else{
+            int tmp = arr[pivot];
+            arr[pivot] = arr[right];
+            arr[right] = tmp;
+        }
+    }
+    quick_sort(start,right-1);
+    quick_sort(right+1,end);
+
 }
