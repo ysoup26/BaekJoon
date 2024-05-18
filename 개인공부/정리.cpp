@@ -151,3 +151,67 @@ int bottom_up(int n){
     }
     return d[n];
 }
+
+/*최단경로*/
+
+//노드A -> 노드B로부터의 최단 경로를 구하는 알고리즘
+//다익스트라 알고리즘과 플로이드 워셜 알고리즘이 존재
+//계산되지 않은 최단 경로는 INF로 두는 것이 소소한 특징
+
+//다익스트라 알고리즘은 매 과정에서 최소 노드를 찾고, 
+//그 노드의 인접 노드 값을 갱신하는 방법으로 최단 경로를 구하는 방식
+#define INF 987654321
+
+//dist배열을 확인하여, 최소 노드 idx반환
+int get_min_node(){
+    int min_node_i;
+    int min_dist = INF;
+    for(int i=1;i<=N;i++){
+        if(min_dist < dist[i] && !visited[i])
+        {
+            min_dist = dist[i];
+            min_node_i = i;
+        }
+    }
+    return min_node_i;
+}
+
+void dijkstra(int x){
+    visited[x] = true;
+    d[x] = 0;
+    for(int i=0;i<arr[x].size();i++){
+        pair<int,int> next = arr[x][i];
+        d[next.first] = next.second;
+    }
+    for(int i=2;i<=N;i++){
+        int now = get_min_node();
+        visited[now] = true;
+        for(int j=0;i<arr[now].size();j++){
+            pair<int,int> next = arr[now][j];
+            int cost = d[now] + next.second;
+            if(d[next.first]>cost)
+                d[next.first] = cost;
+        }
+
+    }
+}
+
+//플로이드 워셜은 중점 노드를 이용해 최단 경로를 구함
+//노드A와 노드B 사이의 중점 노드인 노드C를 계속 변경하며 최소값일때 갱신하는 방식
+//최단경로를 저장하는 NxN배열을 채워나가며 최단경로를 구하고 모든 경우의 수를 구할 수 있다는 장점이 있다.
+//자기 자신에게 갈때의 경로값은 0이다.
+
+int main(){
+    //초기값을 전부 INF로
+    //자기자신에 접근하는 부분은 0으로: d[a][a] =0
+    //간선 정보 입력
+
+    //플로이드 워셜 알고리즘
+    for(int k=1;k<=N;k++){
+        for(int a=1;a<=N;a++){
+            for(int b=1;b<=N;b++)
+                d[a][b] = min(d[a][b],d[a][k]+d[k][b]);
+        }
+    }
+    //NxN배열 출력 +)방문할 수 없는 노드는 INF로 출력
+}
