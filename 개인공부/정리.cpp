@@ -86,6 +86,7 @@ void quick_sort(int start,int end){
 }
 
 /*이진탐색*/
+
 //특정 값이나 단어를 탐색하는 방법
 //중점을 변경하며 탐색하는 방식이고 재귀, 반복문으로 구현할 수 있다
 //찾으려는 값이 중점보다 작다면, 중점이 새로운 끝점이 되고
@@ -122,4 +123,31 @@ int binary_search(int find,int start,int end){
     else
         return binary_search(find,m+1, end); 
 
+}
+
+/*다이나믹 프로그래밍*/
+
+//특정 계산을 할 때(ex 피보나치), 중복 연산을 줄이는 효율적인 방법론
+//탑다운, 바텀업 방식이 있으며 d배열에 값들을 저장해 연산을 줄인다 
+//문제 유형: 연산을 사용하는 최소값 구하기(d배열에 각 연산횟수를 저장하여 구함)
+//          최소값, 최소 개수 등등
+
+ind d[100];
+//재귀함수를 이용한 탑다운
+int top_down(int n){
+    if(n==1 ||n==2)
+        return n;
+    if(d[n]!=0)
+        return d[n];
+    d[n] = top_down(n-1)+ top_down(n-2);
+    return d[n];
+}
+
+int bottom_up(int n){
+    d[1] = 1;
+    d[2] = 2;
+    for(int i=3;i<=n;i++){
+        d[i] = d[i-1] + d[i-2];
+    }
+    return d[n];
 }
