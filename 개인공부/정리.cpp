@@ -84,3 +84,42 @@ void quick_sort(int start,int end){
     quick_sort(right+1,end);
 
 }
+
+/*이진탐색*/
+//특정 값이나 단어를 탐색하는 방법
+//중점을 변경하며 탐색하는 방식이고 재귀, 반복문으로 구현할 수 있다
+//찾으려는 값이 중점보다 작다면, 중점이 새로운 끝점이 되고
+//                      크다면, 중점이 새로운 시작점이 된다.
+bool binary_search(int find,int start,int end){
+    int s,m,e,find_idx;
+    s = start;
+    e = end;
+    while(true){
+        if(s > e){
+            find_idx = -1; //시작과 끝점이 교차한다면 값을 찾을 수 없는 것
+            break;
+        }
+        m = (s+e)/2;
+        if(arr[m] == find){
+            find_idx = m;
+            break;
+        }else if(arr[m] > find)
+            e = m-1;
+        else
+            s = m+1;
+    }
+    return find_idx;
+}
+
+int binary_search(int find,int start,int end){
+    if(start>end)
+        return -1;
+    int m = (start+end)/2;
+    if(arr[m] == find)
+        return m;
+    else if(arr[m] > find)
+        return binary_search(find,start,m-1);
+    else
+        return binary_search(find,m+1, end); 
+
+}
