@@ -16,6 +16,8 @@ using namespace std;
 
 string keyword[6] ={"으쓱","미소","윙크","실망","놀람","화남"};
 
+float check[4] ={0.5,0.77,0.45,0.5 };
+
 string get_random_keywords(){
     std::random_device rd;
     std::mt19937 gen(rd());
