@@ -2,11 +2,11 @@
 
 using namespace std;
 
-//float coins[4] = {0.25,0.1,0.05,0.01};
 int coins[4] = {25,10,5,1};
 int coins_N[4] = {0,0,0,0};
 
-
+//1달러 기준으로 입력받았기 때문에 동전들도 그에 맞춰 *100을 해준다
+//실수 단위로 작성했을땐 "틀렸습니다" -> 실수로 나눗셈을 하며 오차가 발생하는듯
 int main(){
     int T;
     cin>>T;
@@ -14,7 +14,6 @@ int main(){
         float money;
         int c_idx;
         cin>>money;
-        //money/=100; // 1달러 기준으로 입력받았기 때문에 센트 단위로 변경
         c_idx = 0;
         while(c_idx<4){ // 동전 단위를 감소시키며 계산
             int coin_N = money/coins[c_idx];
