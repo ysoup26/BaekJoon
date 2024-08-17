@@ -35,6 +35,17 @@ namespace ConsoleApp1
             foreach(string i in strs){
                 Console.WriteLine(i);
             }
+            //비교
+            for(i=0;i<strs.length;i++){
+                Console.WriteLine(strs[i]);
+            }
+
+            //중첩for문
+            for(i=0;i<6;i++){
+                for(int k=0;k<6;k++){
+                    Console.WriteLine(i+","+k);
+                }
+            }
         }
     }
 }
