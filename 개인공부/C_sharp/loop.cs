@@ -25,6 +25,16 @@ namespace ConsoleApp1
             }while(i<1);
 
             //for문
+            for(i =0;i<6;i++){
+                Console.WriteLine("i의 값 "+i);
+            }
+
+            //foreach
+            string[] strs = {"바나나","사과","파인애플","망고"};
+
+            foreach(string i in strs){
+                Console.WriteLine(i);
+            }
         }
     }
 }
