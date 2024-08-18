@@ -12,38 +12,45 @@ namespace ConsoleApp1
         {
             //while문
             int i = 0;
-            while(i<6){ //괄호가 참일때 실행됨
-                Console.WriteLine("i의 값 "+i);
+            while (i < 6)
+            { //괄호가 참일때 실행됨
+                Console.WriteLine("i의 값 " + i);
                 i++;
             }
 
             //do-while문: 한번은 무조건 실행
             i = 0;
-            do{
+            do
+            {
                 Console.WriteLine("출력");
                 i++;
-            }while(i<1);
+            } while (i < 1);
 
             //for문
-            for(i =0;i<6;i++){
-                Console.WriteLine("i의 값 "+i);
+            for (i = 0; i < 6; i++)
+            {
+                Console.WriteLine("i의 값 " + i);
             }
 
             //foreach
-            string[] strs = {"바나나","사과","파인애플","망고"};
+            string[] strs = { "바나나", "사과", "파인애플", "망고" };
 
-            foreach(string i in strs){
-                Console.WriteLine(i);
+            foreach (string s in strs)
+            {
+                Console.WriteLine(s);
             }
             //비교
-            for(i=0;i<strs.length;i++){
+            for (i = 0; i < strs.Length; i++)
+            {
                 Console.WriteLine(strs[i]);
             }
 
             //중첩for문
-            for(i=0;i<6;i++){
-                for(int k=0;k<6;k++){
-                    Console.WriteLine(i+","+k);
+            for (i = 0; i < 6; i++)
+            {
+                for (int k = 0; k < 6; k++)
+                {
+                    Console.WriteLine(i + "," + k);
                 }
             }
         }
