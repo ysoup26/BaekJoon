@@ -20,7 +20,7 @@ namespace ConsoleApp1
                 int[] asd = { 0, 1, 2, 3 };
 
                 Console.WriteLine(asd[Int32.Parse(a)]); //범위를 넘어서면 오류발생(처리되지 않은 예외 발생)
-                throw new Exception("임의로 예외를 넣어주는 방법");
+                throw new Exception("임의로 예외를 넣어주는 방법"); //강제로 예외처리 발생
             }
             catch(IndexOutOfRangeException e) //특정 오류만을 catch할 수 있음
             {
