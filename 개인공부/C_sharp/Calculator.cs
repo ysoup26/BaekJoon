@@ -18,11 +18,11 @@ namespace Calculator
             Console.WriteLine("------------------------\r");
 
             //Ask the user to type the first number.
-            Console.WriteLine("Type a number, and thenn press Enter");
+            Console.WriteLine("Type a number, and then press Enter");
             num1 = Convert.ToInt32(Console.ReadLine()); //INT32.Parse(a)
 
             //Ask the user to type the first number.
-            Console.WriteLine("Type a number, and thenn press Enter");
+            Console.WriteLine("Type a number, and then press Enter");
             num2 = Convert.ToInt32(Console.ReadLine());
 
             //Ask the user to choose an option
