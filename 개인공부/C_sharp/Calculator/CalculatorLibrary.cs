@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Calculator
+namespace CalculatorLibrary
 {
-    class Calculator
+    public class Calculator
     {
-        public static double DoOperation(double num1, double num2,string op)
+        public static double DoOperation(double num1, double num2, string op)
         {
             double result = double.NaN; //Default value is "not-a-number" if an operation, such as division, could result in an error. //나누기 연산 등으로 오류가 발생하면, 디폴트는 "숫자가 아님"
             Console.WriteLine(op);
