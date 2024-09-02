@@ -18,8 +18,8 @@ namespace SaleApp
         //dict를 이용하여 각 매장의 매출액을 구함 
         public IDictionary<string, int> GetPerStoreSales()
         {
-            Dictionary<string,int> dict = new Dictionary<string,int>();
-            foreach (Sale sale in _sales) 
+            var dict = new Dictionary<string,int>();
+            foreach (var sale in _sales) 
             {
                 if (dict.ContainsKey(sale.ShopName))
                     dict[sale.ShopName] += sale.Amount;
