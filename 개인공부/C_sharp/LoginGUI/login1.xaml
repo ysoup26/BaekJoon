@@ -5,66 +5,84 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfGUI.View"
         mc:Ignorable="d"
-        Title="Window1" Height="540" Width="860">
+        Title="Window1" Width="1280" Height="720">
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/View/12.png"/>
-        </Grid.Background>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition Width="1.7*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="5*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="1" Grid.Column="1" Background="#FF0C1373">
+        <Image Source="/View/3-2.jpg" Stretch="Fill">
+            <Image.Effect>
+                <!-- BlurEffect 설정 -->
+                <BlurEffect Radius="0"/>
+            </Image.Effect>
+        </Image>
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"></RowDefinition>
-                <RowDefinition Height="3*"></RowDefinition>
-                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="5*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button>Sign in</Button>
-                        <Button>Sign up</Button>
-                    </StackPanel>
-                    <TextBlock Text="Sign up" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                </StackPanel>
-            </Grid>
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Margin="15 12">
-                    <TextBox>Email</TextBox>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="1.7*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Row="1" Grid.Column="1" BorderBrush="White" BorderThickness="0.8" CornerRadius="15">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/View/3-1.jpg" Stretch="None"/>
+                    </Grid.Background>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1.5*"></RowDefinition>
+                        <RowDefinition Height="3*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button>Sign in</Button>
+                                <Button>Sign up</Button>
+                            </StackPanel>
+                            <TextBlock Text="Sign up" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="0.5*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Margin="15 12">
+                            <TextBox Background="#FF4D61B4" Foreground="White" SelectionBrush="#FF68493B">Email</TextBox>
+                        </Grid>
+                        <Grid Grid.Row="1" Margin="15 12">
+                            <TextBox Background="#FF4D61B4" Foreground="White" SelectionBrush="#FF68493B">UserName</TextBox>
+                        </Grid>
+                        <Grid Grid.Row="2" Margin="15 12">
+                            <TextBox Background="#FF4D61B4" Foreground="White" SelectionBrush="#FF68493B">Password</TextBox>
+                        </Grid>
+                        <Grid Grid.Row="3" Margin="10">
+                            <CheckBox Foreground="White" HorizontalAlignment="Right">Remember me</CheckBox>
+                        </Grid>
+                        <Grid Grid.Row="4" Margin="15 12">
+                            <Button  Background="#FF0B1437" Foreground="White" >Sign in</Button>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="2">
+
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
+                                <Button>G</Button>
+                                <Button>F</Button>
+                                <Button>T</Button>
+                                <Button>G</Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
                 </Grid>
-                <Grid Grid.Row="1" Margin="15 12">
-                    <TextBox>UserName</TextBox>
-                </Grid>
-                <Grid Grid.Row="2" Margin="15 12">
-                    <TextBox>PassWord</TextBox>
-                </Grid>
-            </Grid>
-            <Grid Grid.Row="2">
-                <CheckBox Foreground="White" HorizontalAlignment="Right">Remember me</CheckBox>
-                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button>Sign in</Button>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
-                        <Button>G</Button>
-                        <Button>F</Button>
-                        <Button>T</Button>
-                        <Button>G</Button>
-                    </StackPanel>
-                </StackPanel>
-            </Grid>
+            </Border>
         </Grid>
     </Grid>
 </Window>
